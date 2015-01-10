@@ -1,0 +1,1 @@
+require('./ReactTimber.spec.js');

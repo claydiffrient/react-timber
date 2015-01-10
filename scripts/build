@@ -1,0 +1,10 @@
+#!/bin/sh
+mkdir -p dist
+NODE_ENV=production node_modules/.bin/browserify lib/index.js \
+  -t reactify \
+  -t browserify-shim \
+  -t envify \
+  --detect-globals false \
+  -s ReactTimber > dist/react-timber.js
+node_modules/.bin/uglifyjs dist/react-timber.js \
+  --compress warnings=false > dist/react-timber.min.js
