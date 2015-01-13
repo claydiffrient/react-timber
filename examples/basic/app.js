@@ -1,13 +1,13 @@
 /** @jsx React.DOM */
 
 var React = require('react');
-var ReactTimber = require('../lib/index');
+var ReactTimber = require('../../lib/index');
 
 var appElement = document.getElementById('example');
 
 var folders = [
   {
-    title: "Folder One"
+    title: "Folder One",
   },
   {
     title: "Folder Two"
@@ -24,10 +24,16 @@ var folders = [
 
 var App = React.createClass({
 
+  renderFolders: function () {
+    return folders.map((folder) => {
+            return (<ReactTimber title={folder.title} />);
+          });
+  },
+
   render: function() {
     return (
       <div>
-        <ReactTimber folders={folders} favoriteColor="green" />
+        {this.renderFolders()}
       </div>
     );
   }
