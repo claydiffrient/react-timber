@@ -4,6 +4,11 @@ body {
   background: #ccc;
 }
 
+.ReactTimber__toggler {
+  display: inline-block;
+  float:left;
+}
+
 .ReactTimber__toggler--collapsed {
   -webkit-transform: rotate(-90deg);
   -moz-transform: rotate(-90deg);

@@ -35,19 +35,31 @@ var folders = [
 
 var App = React.createClass({
 
+  getInitialState: function () {
+    return {
+      toDisplay: null
+    }
+  },
+
+  handleClick: function (event) {
+    this.setState({
+      toDisplay: 'You are looking at ' + event.currentTarget.text
+    });
+  },
+
 
   renderChildren: function (folder) {
     if (folder.hasOwnProperty('folders')) {
       return folder.folders.map((f) => {
         if (f.hasOwnProperty('folders')) {
           return (
-            <ReactTimber title={f.title} isRoot="false">
+            <ReactTimber onClick={this.handleClick} title={f.title} isRoot="false">
               {this.renderChildren(f)}
             </ReactTimber>
           );
         }
         return (
-          <ReactTimber title={f.title} isRoot="false" />
+          <ReactTimber onClick={this.handleClick} title={f.title} isRoot="false" />
         );
       });
     }
@@ -57,7 +69,7 @@ var App = React.createClass({
   renderFolders: function () {
     return folders.map((folder, index) => {
             return (
-              <ReactTimber title={folder.title} isRoot={index === 0}>
+              <ReactTimber onClick={this.handleClick} title={folder.title} isRoot={index === 0}>
               {this.renderChildren(folder)}
               </ReactTimber>
             );
@@ -66,8 +78,13 @@ var App = React.createClass({
 
   render: function() {
     return (
-      <div>
-        {this.renderFolders()}
+      <div class="App">
+        <div class="App__TreeArea">
+          {this.renderFolders()}
+        </div>
+        <div class="App__DisplayArea">
+          {this.state.toDisplay}
+        </div>
       </div>
     );
   }
