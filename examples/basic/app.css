@@ -10,3 +10,11 @@ body {
   -ms-transform: rotate(-90deg);
   transform: rotate(-90deg);
 }
+
+.ReactTimber__folder-children {
+  margin-left: 16px;
+}
+
+.ReactTimber__folder-children--hidden {
+  display: none;
+}
