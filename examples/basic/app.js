@@ -1,36 +1,41 @@
 /** @jsx React.DOM */
 
 var React = require('react');
-var ReactTimber = require('../../lib/index');
+var ReactTimber = require('../../lib/index').ReactTimber;
+var Node = require('../../lib/index').Node;
 
 var appElement = document.getElementById('example');
 
-var folders = [
-  {
-    title: "Folder One",
-    folders: [
-      {title: "Folder One - A"},
-      {title: "Folder One - B"},
-      {
-        title: "Folder One - C",
-        folders: [
-          {title: "Folder One - C - 1"},
-          {title: "Folder One - C - 2"},
-          {title: "Folder One - C - 3"}
-        ]
-      }
-    ]
-  },
-  {
-    title: "Folder Two"
-  },
-  {
-    title: "Folder Three"
-  },
-  {
-    title: "Folder Four"
-  },
-];
+
+var rootFolder = {
+  title: "Root Folder",
+  folders: [
+    {
+      title: "Folder One",
+      folders: [
+        {title: "Folder One - A"},
+        {title: "Folder One - B"},
+        {
+          title: "Folder One - C",
+          folders: [
+            {title: "Folder One - C - 1"},
+            {title: "Folder One - C - 2"},
+            {title: "Folder One - C - 3"}
+          ]
+        }
+      ]
+    },
+    {
+      title: "Folder Two"
+    },
+    {
+      title: "Folder Three"
+    },
+    {
+      title: "Folder Four"
+    },
+  ]
+};
 
 
 var App = React.createClass({
@@ -49,40 +54,40 @@ var App = React.createClass({
 
 
   renderChildren: function (folder) {
+
+  },
+
+
+  renderFolders: function (folder) {
     if (folder.hasOwnProperty('folders')) {
       return folder.folders.map((f) => {
         if (f.hasOwnProperty('folders')) {
           return (
-            <ReactTimber onClick={this.handleClick} title={f.title} isRoot="false">
-              {this.renderChildren(f)}
-            </ReactTimber>
+            <Node onClick={this.handleClick} title={f.title} isRoot="false">
+              {this.renderFolders(f)}
+            </Node>
           );
         }
         return (
-          <ReactTimber onClick={this.handleClick} title={f.title} isRoot="false" />
+          <Node onClick={this.handleClick} title={f.title} isRoot="false" />
         );
       });
+    } else {
+      return (
+          <Node onClick={this.handleClick} title={f.title} isRoot="true" />
+        );
     }
-  },
-
-
-  renderFolders: function () {
-    return folders.map((folder, index) => {
-            return (
-              <ReactTimber onClick={this.handleClick} title={folder.title} isRoot={index === 0}>
-              {this.renderChildren(folder)}
-              </ReactTimber>
-            );
-          });
   },
 
   render: function() {
     return (
-      <div class="App">
-        <div class="App__TreeArea">
-          {this.renderFolders()}
+      <div className="App">
+        <div className="App__TreeArea">
+          <ReactTimber>
+            {this.renderFolders(rootFolder)}
+          </ReactTimber>
         </div>
-        <div class="App__DisplayArea">
+        <div className="App__DisplayArea">
           {this.state.toDisplay}
         </div>
       </div>
