@@ -23,3 +23,20 @@ body {
 .ReactTimber__folder-children--hidden {
   display: none;
 }
+
+.App__TreeArea {
+  float: left;
+  border: black 1px solid;
+  width: 300px;
+}
+
+.App__DisplayArea {
+  float: left;
+  border: black 1px solid;
+  height: 400px;
+  width: 800px;
+}
+
+.App__DisplayArea-button:focus {
+  background-color: lightblue;
+}

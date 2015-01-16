@@ -59,24 +59,21 @@ var App = React.createClass({
 
 
   renderFolders: function (folder) {
+
+    var children;
+
     if (folder.hasOwnProperty('folders')) {
-      return folder.folders.map((f) => {
-        if (f.hasOwnProperty('folders')) {
-          return (
-            <Node onClick={this.handleClick} title={f.title} isRoot="false">
-              {this.renderFolders(f)}
-            </Node>
-          );
-        }
-        return (
-          <Node onClick={this.handleClick} title={f.title} isRoot="false" />
-        );
+      children = folder.folders.map((f) => {
+        return this.renderFolders(f);
       });
-    } else {
-      return (
-          <Node onClick={this.handleClick} title={f.title} isRoot="true" />
-        );
     }
+
+    return (
+      <Node onClick={this.handleClick} title={folder.title} isRoot={true}>
+        {children}
+      </Node>
+    );
+
   },
 
   render: function() {
@@ -89,6 +86,7 @@ var App = React.createClass({
         </div>
         <div className="App__DisplayArea">
           {this.state.toDisplay}
+          <button className="App__DisplayArea-button" type="button">A worthless button</button>
         </div>
       </div>
     );
