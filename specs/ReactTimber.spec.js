@@ -9,7 +9,8 @@ var timber;
 describe('ReactTimber', function() {
 
   beforeEach(function () {
-    timber = renderReactTimber();
+    timberApp = renderReactTimber();
+    timber = timberApp.refs.timber;
   });
 
   afterEach(function () {
@@ -23,6 +24,10 @@ describe('ReactTimber', function() {
 
   it('should set the first child to have focus', function () {
     ok(timber.refs['node-0'].getDOMNode() === document.activeElement);
+  });
+
+  it('should only have one element in the tab order at a time', function (){
+    ok(timber.getDOMNode().querySelectorAll('[tabIndex="0"]').length === 1);
   });
 
   it('should move focus up when the up arrow is pressed');

@@ -13,20 +13,32 @@ throws = assert.throws;
 
 var _currentDiv = null;
 
+var TimberApp = React.createClass({
+  displayName: 'TimberApp',
+  render: function () {
+    return (
+      <div>
+        <ReactTimber ref="timber">
+          <Node title="Documents" />
+          <Node title="Music">
+            <Node title="Rock" />
+            <Node title="Pop" />
+            <Node title="Classic" />
+          </Node>
+          <Node title="Videos">
+            <Node title="Family" />
+            <Node title="Adventure" />
+          </Node>
+        </ReactTimber>
+        <button ref="aButton" className="button" type="button">Button</button>
+      </div>
+    );
+  }
+});
+
 renderReactTimber = function () {
   return React.render((
-    <ReactTimber>
-      <Node title="Documents" />
-      <Node title="Music">
-        <Node title="Rock" />
-        <Node title="Pop" />
-        <Node title="Classic" />
-      </Node>
-      <Node title="Videos">
-        <Node title="Family" />
-        <Node title="Adventure" />
-      </Node>
-    </ReactTimber>
+    <TimberApp />
   ), document.body);
 };
 
