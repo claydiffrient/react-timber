@@ -48,7 +48,7 @@ var App = React.createClass({
 
   handleClick: function (event) {
     this.setState({
-      toDisplay: 'You are looking at ' + event.currentTarget.text
+      toDisplay: 'You are looking at ' + event.currentTarget.textContent
     });
   },
 
