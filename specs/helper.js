@@ -15,11 +15,24 @@ var _currentDiv = null;
 
 var TimberApp = React.createClass({
   displayName: 'TimberApp',
+
+  getInitialState: function () {
+    return {
+      infoPane: ''
+    }
+  },
+
+  handleClick: function (event) {
+    this.setState({
+      infoPane: event.key
+    });
+  },
+
   render: function () {
     return (
       <div>
         <ReactTimber ref="timber">
-          <Node title="Documents" />
+          <Node title="Documents" onClick={this.handleClick} />
           <Node title="Music">
             <Node title="Rock" />
             <Node title="Pop" />
@@ -31,6 +44,7 @@ var TimberApp = React.createClass({
           </Node>
         </ReactTimber>
         <button ref="aButton" className="button" type="button">Button</button>
+        <div ref="infoPane">{this.state.infoPane}</div>
       </div>
     );
   }

@@ -30,6 +30,11 @@ describe('ReactTimber', function() {
     ok(timber.getDOMNode().querySelectorAll('[tabIndex="0"]').length === 1);
   });
 
+  it('should fire the onClick event when pressing enter', function () {
+    Simulate.keyUp(timber.refs['node-0'].getDOMNode(), {key: 'Enter'});
+    ok(timberApp.refs.infoPane.getDOMNode().textContent === 'Enter');
+  })
+
   it('should move focus up when the up arrow is pressed');
   it('should move focus down when the down arrow is pressed');
 
